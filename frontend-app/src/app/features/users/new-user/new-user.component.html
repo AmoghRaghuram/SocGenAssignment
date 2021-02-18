@@ -2,21 +2,31 @@
     <div>
        <h2> User Information</h2>
     </div>
+
+    <!-- User Form -->
     <form [formGroup]="userForm">
+
+        <!-- First Name -->
         <mat-form-field>
             <mat-label>First Name</mat-label>
             <input matInput formControlName="firstName" required>
         </mat-form-field>
+
+        <!-- Last Name  -->
         <mat-form-field>
             <mat-label>Last Name</mat-label>
             <input matInput formControlName="lastName" required>
         </mat-form-field>
+
+        <!-- Date of Birth -->
         <mat-form-field>
             <mat-label>Date of Birth</mat-label>
             <input matInput [matDatepicker]="picker" formControlName="dateOfBirth">
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
-            </mat-form-field>
+        </mat-form-field>
+
+        <!-- Gender -->
         <mat-form-field>
             <mat-label>Gender</mat-label>
             <select matNativeControl formControlName="gender">
@@ -26,12 +36,17 @@
                 </option>
               </select>
         </mat-form-field>
+
+        <!-- Department -->
         <mat-form-field>
             <mat-label>Department</mat-label>
             <input matInput formControlName="department" required>
         </mat-form-field>
+
+        <!-- Click button to save -->
         <div>
             <button mat-button color="primary" (click)="addNewUser()">Save</button>
         </div>
     </form>
+    <!-- End user form -->
 </div>

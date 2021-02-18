@@ -19,6 +19,9 @@ export class NewUserComponent implements OnInit {
     private dialogRef: MatDialogRef<UsersComponent>) { }
 
   ngOnInit(): void {
+    /**
+     * Initializing new form
+     */
     this.userForm = this._fb.group({
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
@@ -28,9 +31,20 @@ export class NewUserComponent implements OnInit {
     })
   }
 
+/**
+ * Adds a new user
+ */
   addNewUser() {
     console.log('form data', this.userForm.value);
+
+    /**
+     * Generating a new key for each entry
+     */
     let uniqueKey = uuid.v4();
+
+    /**
+     * Creating user obj to save
+     */
     let userObj = {
       id: uniqueKey,
       firstName: this.userForm.get('firstName').value,
@@ -39,12 +53,17 @@ export class NewUserComponent implements OnInit {
       dateOfBirth: this.userForm.get('dateOfBirth').value,
       department: this.userForm.get('department').value
     } as User;
+
+    /**
+     * Saving new user
+     */
     this.userService.saveUser(userObj)
     .subscribe((res) => {
       console.log(res);
       this.dialogRef.close();
+    },
+    (err) => {
+      console.log('Failed to save new user!', err);
     })
-
   }
-
 }

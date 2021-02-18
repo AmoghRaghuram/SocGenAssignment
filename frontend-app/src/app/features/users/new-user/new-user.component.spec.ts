@@ -1,14 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { FormBuilder } from '@angular/forms';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { Observable, of } from 'rxjs';
+import { delay } from 'rxjs/operators';
+import { User } from '../models/user.model';
+import { UserService } from '../services/user.service';
 
 import { NewUserComponent } from './new-user.component';
 
 describe('NewUserComponent', () => {
   let component: NewUserComponent;
   let fixture: ComponentFixture<NewUserComponent>;
-
+  let service: UserService;
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ NewUserComponent ]
+      declarations: [ NewUserComponent, MatDialogRef, MatDialog, MatDialogRef ]
     })
     .compileComponents();
   });
@@ -19,7 +25,11 @@ describe('NewUserComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
+
+  //New test
+  it('should call service.saveUser', () => {
+    spyOn(service, 'saveUser');
+    component.addNewUser();
+    expect(service.saveUser).toHaveBeenCalled();
   });
 });

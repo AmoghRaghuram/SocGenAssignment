@@ -17,6 +17,9 @@ export class UserService {
 
   constructor(private http: HttpClient) { }
 
+  /**
+   * Get all users
+   */
   getUsers(): Observable<User[]> {
     return this.http.get(this.baseUrl + '/users')
     .pipe(
@@ -24,6 +27,9 @@ export class UserService {
     )
   }
 
+  /**
+   * @param userData User
+   */
   saveUser(userData: User) {
     return this.http.post(this.baseUrl + '/user', userData);
   }

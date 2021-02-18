@@ -8,17 +8,26 @@ import { UserService } from '../services/user.service';
   templateUrl: './user-list.component.html',
   styleUrls: ['./user-list.component.scss']
 })
+
 export class UserListComponent implements OnInit {
 
   allUsers: User[] = [];
   dataSource: any[] = [];
+
+  /**
+   * table columns
+   */
   displayedColumns = ['firstName', 'lastName', 'dateOfBirth', 'gender', 'department'];
+
   constructor(private userService: UserService) { }
 
   ngOnInit(): void {
     this.getUsers();
   }
 
+  /**
+   * Returns list of all users
+   */
   getUsers() {
     this.userService.getUsers()
     .subscribe((userData) => {
@@ -28,5 +37,4 @@ export class UserListComponent implements OnInit {
     },
     (err) => console.log('Failed to get users', err));
   }
-
 }
